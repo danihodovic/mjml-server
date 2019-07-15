@@ -2,6 +2,10 @@
 
 A self-hosted alternative to the mjml API. Built with express.
 
+The API is compatible with https://mjml.io/api in that it only exposes one
+endpoint - `/v1/render`, but doesn't require authentication. You should probably
+run this within your own private network.
+
 #### Why?
 
 You're writing an app in another language than Javascript and need to interop
@@ -17,16 +21,16 @@ For an elaborate discussion see: https://github.com/mjmlio/mjml/issues/340
 #### Usage
 
 ```
-docker run -p 15500:15500 danihodovic/mjml-server
-
-$ http POST localhost:15500
-HTTP/1.1 400 Bad Request
+$ http POST localhost:15500/v1/render
+HTTP/1.1 200 OK
 Connection: keep-alive
-Content-Length: 70
-Content-Type: text/html; charset=utf-8
-Date: Mon, 15 Jul 2019 09:27:07 GMT
-ETag: W/"46-U/vqnFpPpjcCarDMmfOu1LVRVAw"
+Content-Length: 2141
+Content-Type: application/json; charset=utf-8
+Date: Mon, 15 Jul 2019 12:26:48 GMT
+ETag: W/"85d-hn49R397DBvYcOi5/4cb+gcoi/I"
 X-Powered-By: Express
 
-Encountered an error while compiling mjml. Check your server logs
+{
+    "html": "\n    <!doctype html>\n    ..."
+}
 ```
