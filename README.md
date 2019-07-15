@@ -21,7 +21,7 @@ For an elaborate discussion see: https://github.com/mjmlio/mjml/issues/340
 #### Usage
 
 ```
-docker run -p 15500:15500 danihodovic/mjml-server
+docker run -p 15500:15500 danihodovic/mjml-http-server
 ```
 
 ```
