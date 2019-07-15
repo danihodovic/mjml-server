@@ -4,8 +4,14 @@
   "description": "Dockerized mjml http server from https://github.com/shyim/mjml-server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
+  "files": [
+    "/lib",
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/danihodovic/mjml-http-server.git"
@@ -20,19 +26,24 @@
   },
   "homepage": "https://github.com/danihodovic/mjml-http-server#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "express-winston": "^3.2.1",
+    "install": "^0.13.0",
     "mjml": "^4.4.0-beta.2",
     "node-graceful": "^2.0.1",
+    "npm": "^6.10.1",
     "winston": "^3.2.1",
     "yargs": "^13.2.4"
   },
   "devDependencies": {
+    "axios": "^0.19.0",
     "eslint": "^6.0.1",
     "eslint-config-standard": "^13.0.1",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^6.1.4"
   }
 }
