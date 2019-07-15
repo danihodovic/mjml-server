@@ -1,0 +1,38 @@
+{
+  "name": "mjml-http-server",
+  "version": "0.0.1",
+  "description": "Dockerized mjml http server from https://github.com/shyim/mjml-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danihodovic/mjml-http-server.git"
+  },
+  "author": "Dani Hodovic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danihodovic/mjml-http-server/issues"
+  },
+  "bin": {
+    "mjml-http-server": "./index.js"
+  },
+  "homepage": "https://github.com/danihodovic/mjml-http-server#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-winston": "^3.2.1",
+    "mjml": "^4.4.0-beta.2",
+    "node-graceful": "^2.0.1",
+    "winston": "^3.2.1",
+    "yargs": "^13.2.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0"
+  }
+}
