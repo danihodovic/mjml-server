@@ -21,6 +21,10 @@ For an elaborate discussion see: https://github.com/mjmlio/mjml/issues/340
 #### Usage
 
 ```
+docker run -p 15500:15500 danihodovic/mjml-server
+```
+
+```
 $ http POST localhost:15500/v1/render
 HTTP/1.1 200 OK
 Connection: keep-alive
