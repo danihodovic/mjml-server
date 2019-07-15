@@ -4,3 +4,4 @@ extends:
   - plugin:node/recommended
 rules:
   node/exports-style: ["error", "module.exports"]
+  semi: [2, "always"]
