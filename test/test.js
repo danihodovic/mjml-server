@@ -1,3 +1,4 @@
+const path = require('path');
 const { describe, it, before, after } = require('mocha');
 const axios = require('axios');
 const { expect } = require('chai');
@@ -38,15 +39,29 @@ describe('server', function () {
         line: 1,
         message: 'Attribute foo is illegal',
         tagName: 'mj-text',
-        formattedMessage: 'Line 1 of /home/dani/repos/mjml-http-server (mj-text) — Attribute foo is illegal'
+        formattedMessage: `Line 1 of ${path.resolve(__dirname, '..')} (mj-text) — Attribute foo is illegal`
       }]
     });
   });
 
-  it.only('returns 404 on invalid endpoints', async () => {
+  it('returns 404 on invalid endpoints', async () => {
     const res = await makeReq(url, { path: '/' });
     expect(res.status).to.eql(404);
     expect(res.data).to.eql({ message: "You're probably looking for /v1/render" });
+  });
+
+  it('parses requests without a content-type', async () => {
+    const res = await axios({
+      method: 'POST',
+      url: url + '/v1/render',
+      headers: { 'Content-Type': '' },
+      data: '<mj-text>hello</mj-text>',
+      validateStatus: false
+    });
+
+    expect(res.status).to.eql(200);
+    expect(res.data.html).to.include('<!doctype html>');
+    expect(res.data.errors).to.eql([]);
   });
 });
 
