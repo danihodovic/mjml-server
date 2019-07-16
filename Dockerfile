@@ -10,4 +10,4 @@ EXPOSE 15500
 
 COPY . /app/
 
-CMD ["node", "./index.js"]
+ENTRYPOINT ["node", "./index.js"]
