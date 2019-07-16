@@ -2,6 +2,9 @@
 extends:
   - standard
   - plugin:node/recommended
+plugins:
+  - no-only-tests
 rules:
   node/exports-style: ["error", "module.exports"]
   semi: [2, "always"]
+  no-only-tests/no-only-tests: error
