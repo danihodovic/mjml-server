@@ -50,7 +50,9 @@ describe('server', function () {
     expect(res.data).to.eql({ message: "You're probably looking for /v1/render" });
   });
 
-  it('parses requests without a content-type', async () => {
+  // The old API did not pass a json object containing the key mjml. The entire
+  // payload was a mjml document.
+  it('is backwards compatible with the old API', async () => {
     const res = await axios({
       method: 'POST',
       url: url + '/v1/render',
@@ -89,7 +91,7 @@ const makeReq = (url, { method = 'POST', path = '/v1/render', data = '' } = {}) 
   return axios({
     method: 'POST',
     url: url + path,
-    data,
+    data: { mjml: data },
     validateStatus: false
   });
 };
