@@ -38,3 +38,8 @@ X-Powered-By: Express
     "html": "\n    <!doctype html>\n    ..."
 }
 ```
+
+#### Configuration
+
+A list of available configuration options can be found in
+[./lib/parse_args.js](./lib/parse_args.js).
