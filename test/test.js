@@ -65,6 +65,26 @@ describe('server', function () {
   });
 });
 
+describe('with --max-body', function () {
+  let server;
+  let url;
+
+  before(async () => {
+    server = await create({ maxBody: '10' }).listen();
+    url = `http://localhost:${server.address().port}`;
+  });
+
+  after(async () => {
+    await server.close();
+  });
+
+  it('returns 413 for payloads larger than --max-body', async () => {
+    const data = 'o'.repeat(10);
+    const res = await makeReq(url, { data: `<mj-text>${data}</mj-text>` });
+    expect(res.status).to.eql(413);
+  });
+});
+
 const makeReq = (url, { method = 'POST', path = '/v1/render', data = '' } = {}) => {
   return axios({
     method: 'POST',
