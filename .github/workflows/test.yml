@@ -9,7 +9,7 @@ on:  # yamllint disable-line rule:truthy
       - master
 
 jobs:
-  test:
+  mocha:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,4 +18,4 @@ jobs:
         with:
           node-version: '12.x'
       - run: npm install
-      - run: npm run test
+      - run: npx mocha
