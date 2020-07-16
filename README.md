@@ -18,6 +18,11 @@ be sent to yet another third party?).
 
 For an elaborate discussion see: https://github.com/mjmlio/mjml/issues/340
 
+#### Features
+
+The server is pre-packaged with the community component [mjml-chart](https://github.com/image-charts/mjml-chart)
+so that you can render charts in emails.
+
 #### Usage
 
 ```
