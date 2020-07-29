@@ -30,7 +30,9 @@
     "express": "^4.17.1",
     "express-winston": "^4.0.2",
     "install": "^0.13.0",
+    "json2mjml": "^1.0.3",
     "mjml": "^4.6.2",
+    "mjml2json": "^1.0.1",
     "node-graceful": "^3.0.0",
     "winston": "^3.2.1",
     "yargs": "^15.0.2"

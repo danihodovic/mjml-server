@@ -87,6 +87,61 @@ describe('with --max-body', function () {
   });
 });
 
+describe('json support', function () {
+  let server;
+  let url;
+
+  before(async () => {
+    server = await create({ validationLevel: 'strict' }).listen();
+    url = `http://localhost:${server.address().port}`;
+  });
+
+  after(async () => {
+    await server.close();
+  });
+
+  it('is compatible with the json API', async () => {
+    const res = await axios({
+      method: 'POST',
+      url: url + '/v1/render',
+      data: '{"mjml":"{\\"tagName\\":\\"mj-text\\",\\"content\\":\\"hello\\",\\"attributes\\":{}}"}',
+      validateStatus: false
+    });
+
+    expect(res.status).to.eql(200);
+    expect(res.data.html).to.include('<!doctype html>');
+    expect(res.data.errors).to.eql([]);
+  });
+
+  it('process valid json to xml', async () => {
+    const res = await axios({
+      method: 'POST',
+      url: url + '/v1/process/json/xml',
+      data: '{ "tagName": "mj-text", "content": "hello", "attributes": {} }',
+      validateStatus: false
+    });
+
+    expect(res.status).to.eql(200);
+    expect(res.data).to.eql('<mj-text>\n  hello\n</mj-text>');
+  });
+
+  it('process valid xml to json', async () => {
+    const res = await axios({
+      method: 'POST',
+      url: url + '/v1/process/xml/json',
+      data: '<mj-text>\n  hello\n</mj-text>',
+      validateStatus: false
+    });
+
+    expect(res.status).to.eql(200);
+    expect(res.data).to.eql({
+      tagName: 'mj-text',
+      content: 'hello',
+      attributes: {}
+    });
+  });
+});
+
 const makeReq = (url, { method = 'POST', path = '/v1/render', data = '' } = {}) => {
   return axios({
     method: 'POST',
