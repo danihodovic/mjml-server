@@ -1,0 +1,5 @@
+{
+  "packages": [
+    "mjml-chart/lib/index.js"
+  ]
+}
