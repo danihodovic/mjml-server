@@ -1,6 +1,6 @@
 {
   "name": "mjml-http-server",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Dockerized mjml http server from https://github.com/shyim/mjml-server",
   "main": "index.js",
   "scripts": {
@@ -30,15 +30,15 @@
     "express": "^4.17.1",
     "express-winston": "^4.0.2",
     "install": "^0.13.0",
-    "mjml": "^4.6.2",
+    "mjml": "^4.12.0",
     "node-graceful": "^3.0.0",
-    "winston": "^3.2.1",
+    "winston": "^3.5.1",
     "yargs": "^16.0.3"
   },
   "devDependencies": {
     "axios": "^0.21.0",
     "chai": "^4.2.0",
-    "eslint": "^7.13.0",
+    "eslint": "^8.8.0",
     "eslint-config-standard": "^14.0.1",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-no-only-tests": "^2.3.1",
