@@ -19,12 +19,25 @@ describe('server', function () {
     await server.close();
   });
 
+  const mjmlPayload = `
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="100px" src="https://mjml.io/assets/img/logo-small.png"></mj-image>
+        <mj-divider border-color="#F45E43"></mj-divider>
+        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
+  `;
+
   it('renders valid mjml', async () => {
-    const data = '<mj-text>hello</mj-text>';
-    const res = await makeReq(url, { data });
+    const res = await makeReq(url, { data: mjmlPayload });
     expect(res.status).to.eql(200);
     expect(res.data.html).to.include('<!doctype html>');
-    expect(res.data.mjml).to.eql(data);
+    expect(res.data.mjml).to.eql(mjmlPayload);
     expect(res.data.mjml_version).to.eql(packageJson.dependencies.mjml);
     expect(res.data.errors).to.eql([]);
   });
@@ -57,7 +70,7 @@ describe('server', function () {
       method: 'POST',
       url: url + '/v1/render',
       headers: { 'Content-Type': '' },
-      data: '<mj-text>hello</mj-text>',
+      data: mjmlPayload,
       validateStatus: false
     });
 
