@@ -33,7 +33,7 @@
     "mjml": "^4.12.0",
     "node-graceful": "^3.0.0",
     "winston": "^3.5.1",
-    "yargs": "^16.0.3"
+    "yargs": "^17.5.1"
   },
   "devDependencies": {
     "axios": "^0.21.0",
