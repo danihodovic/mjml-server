@@ -6,20 +6,7 @@ const packageJson = require('../package.json');
 
 const { create } = require('../lib/server.js');
 
-describe('server', function () {
-  let server;
-  let url;
-
-  before(async () => {
-    server = await create({ validationLevel: 'strict' }).listen();
-    url = `http://localhost:${server.address().port}`;
-  });
-
-  after(async () => {
-    await server.close();
-  });
-
-  const mjmlPayload = `
+const mjmlPayload = `
 <mjml>
   <mj-body>
     <mj-section>
@@ -32,6 +19,19 @@ describe('server', function () {
   </mj-body>
 </mjml>
   `;
+
+describe('server', function () {
+  let server;
+  let url;
+
+  before(async () => {
+    server = await create({ validationLevel: 'strict' }).listen();
+    url = `http://localhost:${server.address().port}`;
+  });
+
+  after(async () => {
+    await server.close();
+  });
 
   it('renders valid mjml', async () => {
     const res = await makeReq(url, { data: mjmlPayload });
@@ -100,11 +100,50 @@ describe('with --max-body', function () {
   });
 });
 
-const makeReq = (url, { method = 'POST', path = '/v1/render', data = '' } = {}) => {
+describe('with basic auth', function () {
+  let server;
+  let url;
+
+  const authUsername = 'user';
+  const authPassword = 'password';
+
+  before(async () => {
+    process.env.BASIC_AUTH_USERS = `{"${authUsername}": "${authPassword}"}`;
+    server = await create({ validationLevel: 'strict' }).listen();
+    url = `http://localhost:${server.address().port}`;
+  });
+
+  after(async () => {
+    await server.close();
+    delete process.env.BASIC_AUTH_USERS;
+  });
+
+  it('returns 401 on basic auth', async () => {
+    const res = await makeReq(url);
+    expect(res.status).to.eql(401);
+    expect(res.data).to.eql('');
+  });
+
+  it('returns 200 with basic auth', async () => {
+    const res = await makeReq(url, {
+      data: mjmlPayload,
+      auth: {
+        username: authUsername,
+        password: authPassword
+      }
+    });
+    expect(res.status).to.eql(200);
+    expect(res.data.html).to.include('<!doctype html>');
+    expect(res.data.mjml).to.eql(mjmlPayload);
+  });
+});
+
+const makeReq = (url, { method = 'POST', path = '/v1/render', data = '', auth = undefined } = {}) => {
   return axios({
-    method: 'POST',
+    method,
     url: url + path,
     data: { mjml: data },
-    validateStatus: false
+    validateStatus: false,
+    auth
   });
 };
