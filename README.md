@@ -43,3 +43,8 @@ X-Powered-By: Express
 
 A list of available configuration options can be found in
 [./lib/parse_args.js](./lib/parse_args.js).
+
+#### Plugins
+
+This server includes following community components:
+* [mjml-msobutton](https://github.com/adrien-zinger/mjml-mso-button) - allows you to create buttons that will be correctly rendered in MS Outlook
