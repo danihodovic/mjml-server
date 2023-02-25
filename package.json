@@ -1,6 +1,6 @@
 {
   "name": "mjml-http-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Dockerized mjml http server from https://github.com/shyim/mjml-server",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "express-winston": "^4.0.2",
     "install": "^0.13.0",
     "mjml": "^4.12.0",
+    "mjml-msobutton": "^v1.1.0",
     "node-graceful": "^3.0.0",
     "winston": "^3.5.1",
     "yargs": "^16.0.3"
