@@ -1,10 +1,10 @@
-FROM node:16-alpine
+FROM node:26-alpine
 
 WORKDIR /app
 
 COPY ./package.json ./package-lock.json /app/
 
-RUN npm install
+RUN npm ci --omit=dev
 
 EXPOSE 15500
 
